@@ -1,3 +1,5 @@
+import Phase1Panel from "@/components/Phase1Panel";
+
 const API_URL =
   process.env.API_INTERNAL_URL ??
   process.env.NEXT_PUBLIC_API_URL ??
@@ -24,14 +26,13 @@ export default async function HomePage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-6 py-16">
       <p className="mb-3 text-sm font-medium uppercase tracking-widest text-[var(--accent)]">
-        Phase 0
+        Phase 1
       </p>
       <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
         TimeJump AI
       </h1>
       <p className="mt-4 max-w-xl text-lg text-[var(--muted)]">
-        Turn Microsoft Teams recordings into a temporary, searchable knowledge
-        base — then jump to the exact moment a topic was discussed.
+        Sign in with Microsoft, paste a Teams recording URL, and resolve it through Graph.
       </p>
 
       <div className="mt-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-6">
@@ -61,14 +62,12 @@ export default async function HomePage() {
         ) : (
           <p className="mt-3 text-sm text-amber-400">
             Could not reach the API at {API_URL}. Start the stack with{" "}
-            <code className="rounded bg-black/30 px-1">docker compose up</code>.
+            <code className="rounded bg-black/30 px-1">make up</code>.
           </p>
         )}
       </div>
 
-      <p className="mt-8 text-sm text-[var(--muted)]">
-        Next: Microsoft sign-in, ingest, and semantic search (upcoming phases).
-      </p>
+      <Phase1Panel />
     </main>
   );
 }

@@ -3,12 +3,20 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.auth import router as auth_router
 from app.api.health import router as health_router
+from app.api.recordings import router as recordings_router
 from app.config import settings
+from app.db.session import Base, engine
+
+# Ensure models are registered on Base.metadata
+import app.models  # noqa: F401
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     yield
 
 
@@ -28,3 +36,5 @@ app.add_middleware(
 )
 
 app.include_router(health_router)
+app.include_router(auth_router)
+app.include_router(recordings_router)

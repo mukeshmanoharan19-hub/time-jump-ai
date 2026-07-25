@@ -1,5 +1,5 @@
 .PHONY: help env up up-d down logs build ps health \
-	backend-install backend-dev frontend-install frontend-dev frontend-build \
+	backend-install backend-dev backend-test frontend-install frontend-dev frontend-build \
 	clean
 
 COMPOSE := docker compose
@@ -19,6 +19,7 @@ help:
 	@echo ""
 	@echo "  make backend-install  Python venv + pip install (backend/)"
 	@echo "  make backend-dev      Run FastAPI locally (requires infra up)"
+	@echo "  make backend-test     Run backend unit tests"
 	@echo "  make frontend-install npm install (frontend/)"
 	@echo "  make frontend-dev     Run Next.js dev server"
 	@echo "  make frontend-build   Production build (frontend/)"
@@ -55,6 +56,9 @@ backend-install:
 
 backend-dev:
 	cd backend && . .venv/bin/activate && uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+backend-test:
+	cd backend && . .venv/bin/activate && pytest -q
 
 frontend-install:
 	cd frontend && npm install

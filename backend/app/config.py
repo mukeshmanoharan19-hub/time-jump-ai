@@ -13,6 +13,12 @@ class Settings(BaseSettings):
     app_secret_key: str = "change-me-in-production"
     session_ttl_hours: int = 24
 
+    azure_ad_tenant_id: str = ""
+    azure_ad_client_id: str = ""
+    azure_ad_client_secret: str = ""
+    azure_ad_redirect_uri: str = "http://localhost:3000/auth/callback"
+    graph_base_url: str = "https://graph.microsoft.com/v1.0"
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
