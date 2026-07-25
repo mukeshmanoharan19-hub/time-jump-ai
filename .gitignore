@@ -1,0 +1,15 @@
+.env
+*.pyc
+__pycache__/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+backend/temp_media/*
+!backend/temp_media/.gitkeep
+node_modules/
+.next/
+out/
+.DS_Store
+*.log

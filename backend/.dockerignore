@@ -1,0 +1,6 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+temp_media/*
+!temp_media/.gitkeep
